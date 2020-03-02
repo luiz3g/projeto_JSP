@@ -26,10 +26,10 @@ public class UsuarioServlet extends HttpServlet {
 
 		try {
 			String acao = request.getParameter("acao");
-			String login = request.getParameter("user");
 
 			if (acao.equalsIgnoreCase("delete")) {
-				daoUsuario.delete(login);
+				int id = Integer.valueOf(request.getParameter("user"));
+				daoUsuario.delete(id);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroUsuario.jsp");
 				request.setAttribute("usuarios", daoUsuario.listar());
 				dispatcher.forward(request, response);
@@ -38,14 +38,17 @@ public class UsuarioServlet extends HttpServlet {
 
 			if (acao.equalsIgnoreCase("editar")) {
 
+				String login = request.getParameter("user");
 				PessoaBean pessoaBean = daoUsuario.buscar(login);
 
-				if(pessoaBean.getId() == null) {
-					
-				}
-				
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroUsuario.jsp");
 				request.setAttribute("user", pessoaBean);
+				dispatcher.forward(request, response);
+			}
+
+			if (acao.equalsIgnoreCase("listarUsuarios")) {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroUsuario.jsp");
+				request.setAttribute("usuarios", daoUsuario.listar());
 				dispatcher.forward(request, response);
 			}
 
@@ -61,10 +64,17 @@ public class UsuarioServlet extends HttpServlet {
 		DaoUsuario daoUsuario = new DaoUsuario();
 		PessoaBean pessoaBean = new PessoaBean();
 
-		pessoaBean.setLogin(request.getParameter("login"));
-		pessoaBean.setSenha(request.getParameter("senha"));
-		
-		daoUsuario.salvarUsuario(pessoaBean);
+		try {
+			
+			if (!daoUsuario.validarCadastro(request.getParameter("login"))) {
+				pessoaBean.setLogin(request.getParameter("login"));
+				pessoaBean.setSenha(request.getParameter("senha"));
+				pessoaBean.setNome(request.getParameter("nome"));
+				daoUsuario.salvarUsuario(pessoaBean);
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 
 		try {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroUsuario.jsp");

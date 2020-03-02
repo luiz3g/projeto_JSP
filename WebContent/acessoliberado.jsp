@@ -11,7 +11,7 @@
 	<%="Acesso Liberado ao Sistema"%>
 
 
-	<a href="cadastroUsuario.jsp">Cadastro de usuários</a>
+	<a href="UsuarioServlet?acao=listarUsuarios">Cadastro de usuários</a>
 
 
 

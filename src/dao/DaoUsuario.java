@@ -21,10 +21,11 @@ public class DaoUsuario {
 	public void salvarUsuario(PessoaBean bean) {
 
 		try {
-			String sql = "insert into public.usuario(login, senha) values (?,?)";
+			String sql = "insert into public.usuario(login, senha, nome) values (?,?,?)";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, bean.getLogin());
 			preparedStatement.setString(2, bean.getSenha());
+			preparedStatement.setString(3, bean.getNome());
 			preparedStatement.execute();
 			connection.commit();
 		} catch (SQLException e) {
@@ -51,17 +52,18 @@ public class DaoUsuario {
 			pessoaBean.setId(resultSet.getLong("id"));
 			pessoaBean.setLogin(resultSet.getString("login"));
 			pessoaBean.setSenha(resultSet.getString("senha"));
+			pessoaBean.setNome(resultSet.getString("nome"));
 			usuarios.add(pessoaBean);
 		}
 
 		return usuarios;
 	}
 
-	public void delete(String login) {
+	public void delete(int login) {
 		try {
-			String sql = "delete from public.usuario where login=?";
+			String sql = "delete from public.usuario where id=?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, login);
+			preparedStatement.setInt(1, login);
 			preparedStatement.execute();
 			connection.commit();
 		} catch (Exception e) {
@@ -86,6 +88,7 @@ public class DaoUsuario {
 			bean.setId(resultSet.getLong("id"));
 			bean.setLogin(resultSet.getString("login"));
 			bean.setSenha(resultSet.getString("senha"));
+			bean.setNome(resultSet.getString("nome"));
 			return bean;
 		}
 
@@ -94,10 +97,11 @@ public class DaoUsuario {
 
 	public void editar(Long id, PessoaBean pessoaBean) {
 		try {
-			String sql = "update public.usuario(login,senha) set login=?, senha=? where id=?";
+			String sql = "update public.usuario(login,senha, nome) set login = ?, senha = ?, nome = ? where id=?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, pessoaBean.getLogin());
 			preparedStatement.setString(2, pessoaBean.getSenha());
+			preparedStatement.setString(3, pessoaBean.getNome());
 			preparedStatement.setLong(3, id);
 			preparedStatement.execute();
 			connection.commit();
@@ -110,5 +114,18 @@ public class DaoUsuario {
 				e1.printStackTrace();
 			}
 		}
+	}
+	
+	public boolean validarCadastro(String login) throws Exception {
+		String sql = "select count(1) as quantidade from public.usuario where login=?";
+		PreparedStatement preparedStatement = connection.prepareStatement(sql);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		
+		if(resultSet.getInt("quantidade") >=1) {
+			return true;
+		}
+		
+		return false;
+		
 	}
 }

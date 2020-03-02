@@ -6,64 +6,75 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Cadastro de usuário</title>
+<title>Cadastro de usuario</title>
 
-<link rel="stylesheet" href="resources/css/cadastro_usuario.css">
+<link href="resources/css/bootstrap.min.css" rel="stylesheet" />
+
 
 </head>
 <body>
 
-	<h2>Cadastro de usuário</h2>
+	<div class="container" style="padding-top: 20px;">
+		<form method="post" action="UsuarioServlet">
 
-<form method="post" action="UsuarioServlet">
-<ul class="form-style-1">
-    <li><label>Nome: <span class="required">*</span></label>
-    <input type="text" name="nome" class="field-divided" placeholder="Nome" /> 
-    </li>
-    
-    <li>
-        <label>Login: <span class="required">*</span></label>
-        <input type="text" name="login" class="field-divided" placeholder="Login"/>
-    </li>
-    
-    <li>
-         <label>Senha: <span class="required">*</span></label>
-        <input type="password" name="senha" class="field-divided" placeholder="Senha" />
-    </li>
-  
-    <li>
-        <input type="submit" value="Submit" />
-    </li>
-</ul>
-</form>
-
-
-
-<div >
-	<table border="1" >
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>Nome</th>
-				<th>Login</th>
-				<th>Excluir</th>
-				<th>Editar</th>
-			</tr>
+			<div class="form-group">
+				<div class=" col-md-6 offset-md-3">
+					<label>Login</label> 
+					<input type="text" class="form-control" name="login" placeholder="Login">
+					</div>
+				</div>
 			
-		</thead>
-		<c:forEach items="${usuarios}" var="user">
-			
-			<tr>
-				<td style="width: 2px;!important"><c:out value="${user.id}"></c:out></td>
-				<td style="width: 10px;!important"><c:out value="${user.login}"></c:out></td>
-				<td style="width: 10px;!important"><c:out value="${user.senha}"></c:out></td>
-				<td style="width: 5px;!important"><a href="UsuarioServlet?acao=delete&user=${user.login}">Excluir</a></td>
-				<td style="width: 5px;!important"><a href="UsuarioServlet?acao=editar&user=${user.login}">Editar</a></td>
-			</tr>
-		
-		</c:forEach>
-	</table>
+				<div class="form-group">
+					<div class=" col-md-6 offset-md-3">
+						<label>Password</label> 
+						<input type="password" class="form-control" name="senha" placeholder="Senha">
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class=" col-md-6 offset-md-3">
+						<label>Nome</label> 
+						<input type="text" class="form-control" name="nome" placeholder="Nome">
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="col-md-8 offset-md-5">
+						<button type="submit" class="btn btn-primary">Cadastrar</button>
+						<button type="reset" class="btn btn-danger">Limpar</button>
+					</div>
+				</div>
+		</form>
 	</div>
+
+<div class="container" style="padding-top: 20px;">
+
+	<table class="table table-bordered">
+  		<thead class="thead-dark">
+   		 <tr>
+     	 	<th scope="col"><strong>Id</strong></th>
+      		<th scope="col"><strong>Login</strong></th>
+      		<th scope="col"><strong>Nome</strong></th>
+      		<th scope="col"><strong>Editar</strong></th>
+      		<th scope="col"><strong>Excluir</strong></th>
+    	</tr>
+  		</thead>
+  			<tbody>
+  				<c:forEach items="${ usuarios }" var="user">
+    				<tr>
+      					<td scope="row"><c:out value="${ user.id }"></c:out></td>
+      					<td scope="row"><c:out value="${ user.login }"></c:out></td>
+      					<td scope="row"><c:out value="${ user.nome }"></c:out></td>
+      					<td scope="row"><a href="UsuarioServlet?acao=editar&user=${user.login }"><img alt="Editar" src="resources/img/edit.png" width="20px"></a></td>
+      					<td scope="row"><a href="UsuarioServlet?acao=delete&user=${user.id }"><img alt="Excluir" src="resources/img/delete.png" width="20px"></a></td>
+    				</tr>
+   				</c:forEach>
+  			</tbody>
+	</table>
+</div>
+
+	<script src="resources/js/bootstrap.min.js"></script>
+	<script src="resources/bootstrap/js/jquery-3.4.1.min.js"></script>
 
 </body>
 </html>
