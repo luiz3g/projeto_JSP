@@ -115,17 +115,19 @@ public class DaoUsuario {
 			}
 		}
 	}
-	
+
 	public boolean validarCadastro(String login) throws Exception {
 		String sql = "select count(1) as quantidade from public.usuario where login=?";
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
+		preparedStatement.setString(1, login);
 		ResultSet resultSet = preparedStatement.executeQuery();
-		
-		if(resultSet.getInt("quantidade") >=1) {
-			return true;
+
+		if (resultSet.next()) {
+			return resultSet.getInt("quantidade") <=0;
+
 		}
-		
+
 		return false;
-		
+
 	}
 }

@@ -8,10 +8,9 @@
 </head>
 <body>
 
-	<%="Acesso Liberado ao Sistema"%>
+	<h1>Bem vindo ao Sistema em JSP</h1>
 
-
-	<a href="UsuarioServlet?acao=listarUsuarios">Cadastro de usuários</a>
+	<a href="UsuarioServlet?acao=listarUsuarios"><img alt="Cadastro Usuário" src="resources/img/user.jpg" title="Cadastrar Usuário"  style="width: 150px;"></a>
 
 
 

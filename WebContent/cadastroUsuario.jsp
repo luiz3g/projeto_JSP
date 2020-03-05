@@ -10,19 +10,24 @@
 
 <link href="resources/css/bootstrap.min.css" rel="stylesheet" />
 
-
 </head>
 <body>
 
+	
+
 	<div class="container" style="padding-top: 20px;">
+	
+		<h3>${Message}</h3>
 		<form method="post" action="UsuarioServlet">
+
+		
 
 			<div class="form-group">
 				<div class=" col-md-6 offset-md-3">
 					<label>Login</label> 
 					<input type="text" class="form-control" name="login" placeholder="Login">
-					</div>
 				</div>
+			</div>
 			
 				<div class="form-group">
 					<div class=" col-md-6 offset-md-3">
