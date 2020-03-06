@@ -22,6 +22,11 @@
 					<label>Login</label> 
 					<input type="text" class="form-control" name="login" placeholder="Login">
 					</div>
+					
+				<c:if test=""></c:if>	<div class="alert alert-danger" role="alert">
+  						<h3>${message}</h3>
+					</div>
+					
 				</div>
 			
 				<div class="form-group">

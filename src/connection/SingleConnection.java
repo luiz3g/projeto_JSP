@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 /**
- * Classe Respons·vel por fazer a conex„o com o banco de dados
+ * Classe Respons√°vel por fazer a conex√£o com o banco de dados
  * 
  * @author Luiz Eduardo
  *
@@ -13,7 +13,7 @@ public class SingleConnection {
 
 	private static String database = "jdbc:postgresql://localhost:5432/curso_jsp?autoReconnect=true";
 	private static String username = "postgres";
-	private static String password = "admin";
+	private static String password = "docker";
 	private static Connection connection = null;
 
 	static {
