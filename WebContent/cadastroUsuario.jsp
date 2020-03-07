@@ -10,11 +10,14 @@
 
 <link href="resources/css/bootstrap.min.css" rel="stylesheet" />
 
-
 </head>
 <body>
 
+	
+
 	<div class="container" style="padding-top: 20px;">
+	
+		<h3>${Message}</h3>
 		<form method="post" action="UsuarioServlet">
 
 			<div class="form-group">
@@ -22,12 +25,8 @@
 					<label>Login</label> 
 					<input type="text" class="form-control" name="login" placeholder="Login">
 					</div>
-					
-				<c:if test=""></c:if>	<div class="alert alert-danger" role="alert">
-  						<h3>${message}</h3>
-					</div>
-					
 				</div>
+			
 			
 				<div class="form-group">
 					<div class=" col-md-6 offset-md-3">
@@ -44,13 +43,20 @@
 				</div>
 				
 				<div class="form-group">
+					<div class=" col-md-6 offset-md-3">
+						<label>Telefone</label> 
+						<input type="text" class="form-control" name="telefone" placeholder="Telefone">
+					</div>
+				</div>
+				
+				<div class="form-group">
 					<div class="col-md-8 offset-md-5">
 						<button type="submit" class="btn btn-primary">Cadastrar</button>
 						<button type="reset" class="btn btn-danger">Limpar</button>
 					</div>
 				</div>
-		</form>
-	</div>
+	  </form>
+</div>
 
 <div class="container" style="padding-top: 20px;">
 
@@ -60,6 +66,7 @@
      	 	<th scope="col"><strong>Id</strong></th>
       		<th scope="col"><strong>Login</strong></th>
       		<th scope="col"><strong>Nome</strong></th>
+      		<th scope="col"><strong>Telefone</strong></th>
       		<th scope="col"><strong>Editar</strong></th>
       		<th scope="col"><strong>Excluir</strong></th>
     	</tr>
@@ -70,6 +77,7 @@
       					<td scope="row"><c:out value="${ user.id }"></c:out></td>
       					<td scope="row"><c:out value="${ user.login }"></c:out></td>
       					<td scope="row"><c:out value="${ user.nome }"></c:out></td>
+      					<td scope="row"><c:out value="${user.telefone }"></c:out></td>
       					<td scope="row"><a href="UsuarioServlet?acao=editar&user=${user.login }"><img alt="Editar" src="resources/img/edit.png" width="20px"></a></td>
       					<td scope="row"><a href="UsuarioServlet?acao=delete&user=${user.id }"><img alt="Excluir" src="resources/img/delete.png" width="20px"></a></td>
     				</tr>

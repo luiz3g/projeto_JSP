@@ -63,15 +63,19 @@ public class UsuarioServlet extends HttpServlet {
 
 		DaoUsuario daoUsuario = new DaoUsuario();
 		PessoaBean pessoaBean = new PessoaBean();
-
+		
 		try {
-			if (!daoUsuario.validarCadastro(request.getParameter("login"))) {
+			boolean validarLogin = daoUsuario.validarCadastro(request.getParameter("login"));
+			
+			if (validarLogin == true) {
+				request.setAttribute("message", "Login já cadastrado");
+
+			} else if (validarLogin == false) {
 				pessoaBean.setLogin(request.getParameter("login"));
 				pessoaBean.setSenha(request.getParameter("senha"));
 				pessoaBean.setNome(request.getParameter("nome"));
+				pessoaBean.setTelefone(request.getParameter("telefone"));
 				daoUsuario.salvarUsuario(pessoaBean);
-			} else {
-				request.setAttribute("message", "Login já cadastrado");
 			}
 
 		} catch (Exception e1) {
@@ -87,7 +91,5 @@ public class UsuarioServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
-
 }
